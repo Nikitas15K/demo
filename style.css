@@ -52,9 +52,10 @@ input{
     'number7 number8 number9 symbol_plus'
     'number4 number5 number6 symbol_minus'
     'number1 number2 number3 symbol_multi'
-    'number0 symbol_decimal symbol_divid symbol_equal' ;
+    'number0 symbol_decimal symbol_divid symbol_power'
+    'symbol_equal symbol_equal symbol_equal symbol_equal' ;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap:1%;
 }
 
@@ -109,6 +110,7 @@ button:hover {
 .symbol_minus{grid-area:symbol_minus ;}
 .symbol_multi{grid-area:symbol_multi ;}
 .symbol_divid{grid-area:symbol_divid ;}
+.symbol_power{grid-area:symbol_power;}
 .symbol_equal{grid-area:symbol_equal ;
 background: rgb(109, 218, 109);}
 
