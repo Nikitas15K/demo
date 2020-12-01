@@ -25,7 +25,7 @@ function calculator(event) {
         calculatorDisplay.value = '';
     }
 
-    else if (clickedKeyValue === ' + ' || clickedKeyValue === ' - ' || clickedKeyValue === ' * ' || clickedKeyValue === ' / ' || clickedKeyValue === ' ^ ') {
+    else if (clickedKeyValue === ' + ' || clickedKeyValue === ' - ' || clickedKeyValue === ' * ' || clickedKeyValue === ' / ' || clickedKeyValue === ' ** ') {
         number1 = eval(calculatorDisplay.value);
         symbol = clickedKeyValue;
         calculatorDisplay.value = '';
