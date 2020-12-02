@@ -2,8 +2,7 @@
 	margin:0;
 	padding:0;
     box-sizing: border-box;
-    
-    
+    font-family:'PT Serif', serif;
 }
 
 body{
@@ -29,19 +28,19 @@ body{
 }
 
 input{
-    height:5rem;
-    background: rgb(0, 255, 136);
+    height:4rem;
+    background: rgb(108, 209, 162);
     /* border-radius: 5% 5% 0 0; */
     border:none;
     text-align: right;
     width:100%;
-    font-size:45px;
+    font-size:3rem;
     font-weight:bold;
     padding-right: 10%;
 }
 
 .keys{
-    background: white;
+    background: rgb(239, 245, 204);
     /* border-radius: 0 0 5% 5% ; */
     padding: 0 10% 0 1%;
     width: 100%;
@@ -81,8 +80,8 @@ button:hover {
 
 
 .clear{
-    color: white;
-    background:red;
+    color: rgb(255, 255, 255);
+    background:rgb(54, 19, 28);
     grid-area:symbol_clear; 
     padding:5% 0 0 0; 
 	
@@ -146,7 +145,7 @@ button:hover {
 }
 .symbol_equal{
     grid-area:symbol_equal ;
-    background: rgb(109, 218, 109);
+    background: rgb(108, 209, 162);
 }
 .symbol_decimal{
     grid-area:symbol_decimal;
