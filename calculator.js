@@ -24,9 +24,17 @@ function calculator(event) {
     if (clickedKeyValue === ' = ') {
         //The eval() function evaluates JavaScript code represented as a string.
         number2 = eval(parseFloat(calculatorDisplay.value));
-        if (symbol === 'math_log') {
+        if (symbol === 'log') {
             calculatorDisplay.value = eval(Math.log(number1) / Math.log(number2));
-        } else {
+        }
+        else if (symbol === '' && number1 === 0 && calculatorDisplay.value === '') {
+            calculatorDisplay.value = 0;
+        }
+
+        else if (symbol === '' && number1 === 0) {
+            calculatorDisplay.value = eval(parseFloat(calculatorDisplay.value));
+        }
+        else {
             calculatorDisplay.value = eval(parseFloat(number1) + symbol + parseFloat(number2));
         }
         calculator_history.innerHTML = "";
@@ -35,6 +43,7 @@ function calculator(event) {
     }
 
     else if (clickedKeyValue == 'math_sqrt') {
+
         number1 = parseFloat(calculatorDisplay.value);
         number2 = parseFloat(0.5);
         calculatorDisplay.value = eval(number1 ** number2);
@@ -44,63 +53,72 @@ function calculator(event) {
     }
 
     else if (clickedKeyValue === 'C') {
-        // clear all
-        calculatorDisplay.value = '';
-        calculator_history.innerHTML = '';
-        number1 = 0;
-        number2 = 0;
-        symbol = '';
+    // clear all
+    calculatorDisplay.value = '';
+    calculator_history.innerHTML = '';
+    number1 = 0;
+    number2 = 0;
+    symbol = '';
+}
+
+//!if a symbol is clicked...
+else if (clickedKeyValue === ' + ' || clickedKeyValue === ' - ' || clickedKeyValue === ' * ' || clickedKeyValue === ' / ' || clickedKeyValue === ' ** ' || clickedKeyValue === 'log') {
+    //!if math.log symbol is being already displayed in calculator history
+    if (symbol === 'log') {
+        number2 = eval(parseFloat(calculatorDisplay.value));
+        number1 = eval(Math.log(number1) / Math.log(number2));
+        symbol = clickedKeyValue;
+        calculatorDisplay.value = "";
+        calculator_history.innerHTML = number1 + symbol;
     }
 
-    else if (clickedKeyValue === ' + ' || clickedKeyValue === ' - ' || clickedKeyValue === ' * ' || clickedKeyValue === ' / ' || clickedKeyValue === ' ** ' || clickedKeyValue === 'math_log') {
-        //!if math.log symbol is being already displayed in calculator history
-        if (symbol === 'math_log') {
-            number2 = eval(parseFloat(calculatorDisplay.value));
-            number1 = eval(Math.log(number1) / Math.log(number2));
-            symbol = clickedKeyValue;
-            calculatorDisplay.value = "";
-            calculator_history.innerHTML = number1 + symbol;
-        }
+    //!if a math symbol is being displayed in calculator history and calculatorDisplay is empty
+    if (symbol !== '' && calculatorDisplay.value == '') {
 
-        //!if a math symbol is being displayed in calculator history and calculatorDisplay is empty
-        if (symbol !== '' && calculatorDisplay.value == '') {
-
-            symbol = clickedKeyValue;
-            calculatorDisplay.value = "";
-            calculator_history.innerHTML = number1 + symbol;
-        }
-        //!if a math symbol is being displayed in calculator history and calculatorDisplay is not empty
-        else if (symbol !== '' && calculatorDisplay.value !== '') {
-            number2 = eval(parseFloat(calculatorDisplay.value));
-            number1 = eval(parseFloat(number1) + symbol + parseFloat(number2));
-            symbol = clickedKeyValue;
-            calculatorDisplay.value = "";
-            calculator_history.innerHTML = number1 + symbol;
-        }
-        //!if there is NO math symbol calculator history and calculatorDisplay is empty
-        else if (symbol == '' && calculatorDisplay.value == '') {
-            symbol = clickedKeyValue;
-            calculatorDisplay.value = "";
-            calculator_history.innerHTML = number1 + symbol;
-        }
-        //!if there is NO math symbol calculator history and calculatorDisplay is NOT empty
-        else {
-            number1 = eval(parseFloat(calculatorDisplay.value));
-            symbol = clickedKeyValue;
-            calculatorDisplay.value = "";
-            calculator_history.innerHTML = number1 + symbol;
-        }
+        symbol = clickedKeyValue;
+        calculatorDisplay.value = "";
+        calculator_history.innerHTML = number1 + symbol;
     }
-
+    //!if a math symbol is being displayed in calculator history and calculatorDisplay is not empty
+    else if (symbol !== '' && calculatorDisplay.value !== '') {
+        number2 = eval(parseFloat(calculatorDisplay.value));
+        number1 = eval(parseFloat(number1) + symbol + parseFloat(number2));
+        symbol = clickedKeyValue;
+        calculatorDisplay.value = "";
+        calculator_history.innerHTML = number1 + symbol;
+    }
+    //!if there is NO math symbol calculator history and calculatorDisplay is empty
+    else if (symbol == '' && calculatorDisplay.value == '') {
+        symbol = clickedKeyValue;
+        calculatorDisplay.value = "";
+        calculator_history.innerHTML = number1 + symbol;
+    }
+    //!if there is NO math symbol calculator history and calculatorDisplay is NOT empty
     else {
-        // concatenate it to the display
+        number1 = eval(parseFloat(calculatorDisplay.value));
+        symbol = clickedKeyValue;
+        calculatorDisplay.value = "";
+        calculator_history.innerHTML = number1 + symbol;
+    }
+}
+
+else {
+
+    //! a number is clicked after a calculation
+    if (number1 === 0 && symbol === "+") {
+        calculatorDisplay.value = clickedKeyValue;
+        symbol = ""
+    } else {
+
+        //! else if a number is clicked then just concatenate it to the display
         calculatorDisplay.value += clickedKeyValue;
     }
+}
 
-    if (calculatorDisplay.value.includes("NaN") || calculatorDisplay.value.includes("undefined")) {
-        calculator_history.innerHTML = "Something went wrong. Press C"
-        calculatorDisplay.value = "0";
-    }
+if (calculatorDisplay.value.includes("NaN") || calculatorDisplay.value.includes("undefined")) {
+    calculator_history.innerHTML = "Something went wrong. Press C"
+    calculatorDisplay.value = "0";
+}
 
 }
 
